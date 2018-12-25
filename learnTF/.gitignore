@@ -1,0 +1,158 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+out
+gen
+/Tensorflow-master/
+/C6/flower_photos/
+/C6/MNIST_data/
+/C6/model/
+/C6/v3/
+/C6/inception-2015-12-05.tgz
+/C6/tmp/
+/C6/pbtxt/
+/C6/ckpt/
+/C6/final.pb
+<<<<<<< HEAD
+=======
+/C7/recored/
+/testClaassify/v3/
+/testClaassify/train/
+/testClaassify/ckpt/
+/testClaassify/tmp/
+/testClaassify/20180808_163528.jpg
+/testClaassify/mytraindata/
+/AllDataBackUp/
+/C6/mytraindata/
+/C5/model/
+/C5/MNIST_data/
+>>>>>>> 实现了对对象的处理，并对自己的数据集进行了训练和预测
+/C7/path/
+/C7/new_data/
+/C7/20180811_085535.jpg
+/C7/20180811_085553.jpg
+/C6/new_data/
+/testClaassify/20180811_085535.jpg
+/testClaassify/20180811_085553.jpg
+/testClaassify/backup/
+/testClaassify/20180811_08553511.jpg
+/testClaassify/20180812_165259.jpg
+/testClaassify/backup2/
+/TestKeras/train/
+/TestKeras/out/
+/TestKeras/test/
+/TestKeras/20180812_165259.jpg
+/TestKeras/20180811_085553.jpg
+/TestKeras/20180811_085535.jpg
+/testClaassify/20180811_085507.jpg
+/TestKeras/allData/
+/testClaassify/resize/
+/TestKeras/20180811_085507.jpg
