@@ -8,7 +8,10 @@ from torchvision.utils import save_image
 import os
 from tqdm import trange, tqdm
 import random
-
+"""
+使用方法
+python 文件名 trans_pic --file_dir="path/to/img" --out_dir="/path/to/store" 
+"""
 
 def trans_pic(file_dir, out_dir, max_iter=10, pic_size=(224, 224)):
     """
