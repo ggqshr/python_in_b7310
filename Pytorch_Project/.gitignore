@@ -1,0 +1,20 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+/DataGenerator/traindata/
+/DataGenerator/train/
+/DataGenerator/1.jpg
+/DataGenerator/8.jpg
+/DataGenerator/16.jpg
+/DataGenerator/18.jpg
+/DataGenerator/traindata.zip
+/DataGenerator/4.jpg
+/DataGenerator/13.jpg
+/DataGenerator/3.jpg
+/DataGenerator/2.jpg
