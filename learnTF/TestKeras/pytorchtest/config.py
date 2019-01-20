@@ -7,9 +7,9 @@ class DefaultConfig(object):
     vis_port = 8097
     model = 'SqueezeNet'
 
-    train_data_root = "../data/totrain"
+    train_data_root = "./traindata/totrain"
     test_data_root = './data/test1'
-    load_model_path = "./checkpoints/squeezenet_0119_15:20:54.pth"
+    load_model_path = "./checkpoints/squeezenet_0120_10:42:44.pth"  # "./checkpoints/squeezenet_0119_15:20:54.pth"
 
     batch_size = 32
     use_gpu = True

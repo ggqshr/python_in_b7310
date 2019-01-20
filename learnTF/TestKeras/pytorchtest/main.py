@@ -109,7 +109,7 @@ def mytrain(**kwargs):
     opt._parse(kwargs)
     vis = Visualizer(opt.env, port=opt.vis_port)
 
-    model: models.BasicModule = getattr(models, opt.model)()
+    model: models.BasicModule = getattr(models, opt.model)(num_classes=19)
     if opt.load_model_path:
         model.load(opt.load_model_path)
     model.to(opt.device)
@@ -122,7 +122,7 @@ def mytrain(**kwargs):
     ])
     train_data = ImageFolder(opt.train_data_root, transform=to_tensor)
 
-    val_data = ImageFolder(opt.train_data_root.replace("train", "test"), transform=to_tensor)
+    val_data = ImageFolder("./traindata/totest", transform=to_tensor)
 
     train_dataloader = DataLoader(train_data, opt.batch_size, shuffle=True, num_workers=opt.num_workers)
     val_data_loader = DataLoader(val_data, opt.batch_size, shuffle=False, num_workers=opt.num_workers)
@@ -131,7 +131,7 @@ def mytrain(**kwargs):
     lr = opt.lr
     optimizer = model.get_optimizer(lr, opt.weight_decay)
     loss_meter = meter.AverageValueMeter()
-    confusion_matrix = meter.ConfusionMeter(15)
+    confusion_matrix = meter.ConfusionMeter(19)
 
     previous_loss = 1e10
     # train_model = t.nn.DataParallel(model, device_ids=[0, 1])
@@ -177,7 +177,7 @@ def val(model, dataloader):
     计算模型在验证集上的准确率等信息
     """
     model.eval()
-    confusion_matrix = meter.ConfusionMeter(15)
+    confusion_matrix = meter.ConfusionMeter(19)
     for ii, (val_input, label) in tqdm(enumerate(dataloader)):
         val_input = val_input.to(opt.device)
         score = model(val_input)
@@ -192,30 +192,33 @@ def val(model, dataloader):
 def mytest(flie_name, **kwargs):
     vis = Visualizer(opt.env, port=opt.vis_port)
     opt._parse(kwargs)
+
+    model = getattr(models, opt.model)(num_classes=19).eval()
+    if opt.load_model_path:
+        print("loading models.....")
+        model.load(opt.load_model_path)
+    model.to(opt.device)
+
     com = T.Compose(
         [
             T.Resize((224, 224)),
             T.ToTensor(),
         ]
     )
-    img = Image.open(flie_name)
 
-    tt = com(img).unsqueeze(0)
-    tt = tt.to(opt.device)
-    train_data = ImageFolder("../data/totrain", transform=com)
+    train_data = ImageFolder("./traindata/totrain", transform=com)
     # train_dataloader = DataLoader(train_data, batch_size=32, shuffle=False, num_workers=opt.num_workers)
     class_dict = {v: k for k, v in train_data.class_to_idx.items()}
 
-    model = getattr(models, opt.model)().eval()
-    if opt.load_model_path:
-        print("loading models.....")
-        model.load(opt.load_model_path)
-    model.to(opt.device)
+    for f in flie_name:
+        img = Image.open(f)
+        tt = com(img).unsqueeze(0)
+        tt = tt.to(opt.device)
 
-    score = model(tt)
-    pre_class = class_dict[score.argmax().item()]
-    vis.img("the predict classes is {}".format(pre_class), tt)
-    print(pre_class)
+        score = model(tt)
+        pre_class = class_dict[score.argmax().item()]
+        vis.img("the predict classes is {}".format(pre_class), tt)
+        print(pre_class)
     # acc_count = 0
     # total = 0
     # for d, l in train_dataloader:

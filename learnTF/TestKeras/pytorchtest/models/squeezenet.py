@@ -10,6 +10,7 @@ class SqueezeNet(BasicModule):
         self.model_name = 'squeezenet'
         self.model = squeezenet1_1(pretrained=True)
         self.model.num_classes = num_classes
+        print("the model class num is {}".format(self.model.num_classes))
         self.model.classifier = nn.Sequential(
             nn.Dropout(p=0.5),
             nn.Conv2d(512, num_classes, 1),
