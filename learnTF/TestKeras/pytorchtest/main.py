@@ -1,5 +1,4 @@
 from config import opt
-import os
 import torch as t
 import models
 from data.dataset import DogCat
@@ -114,10 +113,10 @@ def mytrain(**kwargs):
         model.load(opt.load_model_path)
     model.to(opt.device)
 
-    to_tensor = T.Compose([
+    to_tensor = T.Compose([  # 做一点数据增强
         T.Resize((224, 224)),
-        T.RandomHorizontalFlip(),
-        T.ColorJitter(brightness=0.4, hue=0.3),
+        T.RandomHorizontalFlip(),  # 随机翻转
+        T.ColorJitter(brightness=0.4, hue=0.3),  # 变化图片的色彩等
         T.ToTensor()
     ])
     train_data = ImageFolder(opt.train_data_root, transform=to_tensor)
@@ -176,14 +175,14 @@ def val(model, dataloader):
     """
     计算模型在验证集上的准确率等信息
     """
-    model.eval()
+    model.eval()  # 建模型置为测试模式  dropout层不会生效
     confusion_matrix = meter.ConfusionMeter(19)
     for ii, (val_input, label) in tqdm(enumerate(dataloader)):
         val_input = val_input.to(opt.device)
         score = model(val_input)
         confusion_matrix.add(score.detach().squeeze(), label.long())
 
-    model.train()
+    model.train()  # 将模型置为训练模式，所有的层都会生效
     cm_value = confusion_matrix.value()
     accuracy = 100. * (cm_value.trace()) / (cm_value.sum())
     return confusion_matrix, accuracy
