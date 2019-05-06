@@ -109,26 +109,28 @@ class BdbpSpider(scrapy.Spider):
                 item['company_size'] = info['size'] if 'size' in info else 'NULL'
                 item['company_nature'] = info['employertype']
                 item['company_industry'] = info['first_level_label'] if 'first_level_label' in info else 'NULL'
-                item['company_homepage'] = 'NULL'
-
-                get_content_partial = partial(self.get_content_place_splash, item)
-
-                param_dict = {
-                    'id': query_url,
-                    'query': info['officialname'],
-                    'city': info['city'],
-                    'is_promise': 1,
-                }
-                yield scrapy_splash.SplashRequest(
-                    f'{self.query_url}?{dict2param(param_dict)}',
-                    headers={
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                                      "Chrome/73.0.3683.103 Safari/537.36", },
-                    cookies=self.cookies_dict,
-                    callback=get_content_partial,
-                    dont_filter=True,
-                    args={'images': 0, 'timeout': 3}
-                )
+                # item['company_homepage'] = 'NULL'
+                item['job_place'] = item['place']
+                yield item
+                # 因不能使用Splash 所以只能舍弃掉几个字段
+                # get_content_partial = partial(self.get_content_place_splash, item)
+                #
+                # param_dict = {
+                #     'id': query_url,
+                #     'query': info['officialname'],
+                #     'city': info['city'],
+                #     'is_promise': 1,
+                # }
+                # yield scrapy_splash.SplashRequest(
+                #     f'{self.query_url}?{dict2param(param_dict)}',
+                #     headers={
+                #         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                #                       "Chrome/73.0.3683.103 Safari/537.36", },
+                #     cookies=self.cookies_dict,
+                #     callback=get_content_partial,
+                #     dont_filter=True,
+                #     args={'images': 0, 'timeout': 3}
+                # )
 
     def get_content_place_splash(self, item, response):
         """

@@ -38,13 +38,13 @@ class BaidubaipinItem(scrapy.Item):
         &vip_sign=
         &asp_ad_job=
     """
-    job_content = scrapy.Field()  # //div[@class='job-detail']/p/text()
+    # job_content = scrapy.Field()  # //div[@class='job-detail']/p/text()
     job_place = scrapy.Field()  # //div[@class='job-addr']/p[2]/text()
     """
     https://zhaopin.baidu.com/api/firmasync?query=谷川联行有限公司&city=四川&qid=51288ea64543cc59&pcmod=1&token=ZaKrqG50jCKmIaFlVaGmnVZmbimkFaYaYiJZau5mu1Wa
     """
     company_industry = scrapy.Field()  # industry
-    company_homepage = scrapy.Field()  # official
+    # company_homepage = scrapy.Field()  # official
     hot_score = scrapy.Field() # 百度对于本条招聘信息的热度评分  hot_score
     job_safety_score = scrapy.Field() # 百度对于招聘信息的安全评分  job_safety_score
     company_reputation_score = scrapy.Field() # 百度对于招聘公司的声誉评分 company_reputation_score
