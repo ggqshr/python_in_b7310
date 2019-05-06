@@ -10,6 +10,8 @@ from functools import partial
 from baidubaipin import BaidubaipinItem
 from baidubaipin.settings import cookies_str
 import re
+import time
+import datetime
 
 
 def double_quote(s):
@@ -61,15 +63,23 @@ class BdbpSpider(scrapy.Spider):
     cookies_str = cookies_str
     id_set = set()
     regSpace = re.compile(r'([\s\r\n\t])+')
+    offset = datetime.timedelta(-1)
+    today_date = datetime.datetime.now()
 
     def start_requests(self):
-        base_url = "https://zhaopin.baidu.com/api/qzasync?query=&pn={pagenum}&city={cityname}&is_adq=1&pcmod=1&token=%3D%3Dgllma2SG7oIallam2lnVZmbimkFa4aW2pZayplo1Wa&rn=10"
-        city_list = ["北京", "广州", "深圳", "上海", "重庆", "珠海", "青岛", "成都", "重庆"]
+        base_url = "https://zhaopin.baidu.com/api/qzasync?query=&pn={pagenum}&city={cityname}&is_adq=1&pcmod=1&token=%3D%3Dgllma2SG7oIallam2lnVZmbimkFa4aW2pZayplo1Wa&rn=10&date={time}"
+        city_list = ["北京", "上海", "广州", "天津", "武汉", "沈阳", "哈尔滨", "西安", "南京", "成都", "重庆 大城市；深圳", "杭州", "青岛", "苏州", "太原",
+                     "郑州", "济南", "长春", " 合肥",
+                     "长沙", "南昌", "无锡", "昆明", "宁波", "福州", "石家庄 较大的城市；南宁", "徐州", "烟台", "唐山", "柳州", "常州", "鞍山", "厦门", "抚顺",
+                     "吉林市", "洛阳", "大同", "包头",
+                     "大庆", "淄博", "乌鲁木齐", "佛山", "呼和浩特", "齐齐哈尔", "泉州", "西宁", "兰州", "贵阳", "温州"]
         url_list = []
         for city in city_list:
             for page_num in range(0, 101):
                 url_list.append(base_url.format(
-                    pagenum=page_num, cityname=city
+                    pagenum=page_num,
+                    cityname=city,
+                    time=(self.today_date + self.offset).strftime("%Y%m%d") + "_" + self.today_date.strftime("%Y%m%d")
                 ))
         for url in url_list:
             yield Request(url, headers=self.COMMON_HEADER, cookies=self.cookies_dict, callback=self.parse)

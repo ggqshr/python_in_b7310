@@ -20,8 +20,7 @@ def job():
     cmdline.execute(['scrapy', 'crawl', 'bdbp'])
 
 
-schedule.every().day.at("10:00").do(job)
-schedule.every().day.at("21:00").do(job)
+schedule.every().day.at("12:00").do(job)
 
 while True:
     schedule.run_pending()

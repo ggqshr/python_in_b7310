@@ -20,8 +20,8 @@ class BaidubaipinPipeline(object):
         self.mongo = self.conn.Baidu.Baidu
         # 写入csv要用的
         # self.column = ["id", "link", 'post_time', 'job_name', 'salary', 'place', 'job_nature', 'experience',
-        #                'education', 'job_number', 'job_kind', 'advantage', 'job_content', 'job_place', 'company_name',
-        #                'company_size', 'company_nature', 'company_industry', 'company_homepage', 'company_address'
+        #                'education', 'job_number', 'job_kind', 'advantage', 'job_place', 'company_name',
+        #                'company_size', 'company_nature', 'company_industry', 'company_address'
         #     , 'hot_score', 'job_safety_score', 'company_reputation_score', 'salary_level_score']
         # this_file_name = f"{time.strftime('%Y%m%d%H%M', time.localtime(time.time()))}.csv"
         # self.f = open("Baidu" + this_file_name, mode="w", encoding="utf-8")
